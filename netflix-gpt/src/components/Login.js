@@ -1,10 +1,25 @@
-import React from "react";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidFormData } from "../utils/validate";
 const Login = () => {
   const [showSignInForm, setShowSignInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const email = useRef(null);
+  const password = useRef(null);
+
+  // Define a function named toggleSignInForm.
+  // This function does not take any parameters.
   const toggleSignInForm = () => {
+    // Use the setShowSignInForm function to toggle the value of showSignInForm.
     setShowSignInForm(!showSignInForm);
+  };
+
+  const handleButtonClick = () => {
+    const message = checkValidFormData(
+      email.current.value,
+      password.current.value
+    );
+    setErrorMessage(message);
   };
   return (
     <div>
@@ -15,7 +30,10 @@ const Login = () => {
           alt="background"
         />
       </div>
-      <form className="absolute bg-black p-12 w-3/12 mb-20 mx-auto right-0 left-0 my-36 text-white rounded-lg bg-opacity-80">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="absolute bg-black p-12 w-3/12 mb-20 mx-auto right-0 left-0 my-36 text-white rounded-lg bg-opacity-80"
+      >
         <h1 className="py-4 text-3xl">
           {showSignInForm ? "Sign In" : "Sign Up"}
         </h1>
@@ -27,16 +45,22 @@ const Login = () => {
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email or phone number"
           className="p-4 my-4 w-full bg-gray-900 rounded"
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="p-4 my-4 w-full bg-gray-900 rounded"
         />
-        <button className="p-4 my-6 bg-red-600 w-full rounded">
+        <p className="text-red-600 font-semibold p-2 text-lg">{errorMessage}</p>
+        <button
+          className="p-4 my-6 bg-red-600 w-full rounded"
+          onClick={handleButtonClick}
+        >
           {showSignInForm ? "Sign In" : "Sign Up"}
         </button>
         {showSignInForm ? (
