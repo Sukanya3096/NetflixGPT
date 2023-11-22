@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { checkValidFormData } from "../utils/validate";
 import {
@@ -10,10 +9,10 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BACKGROUND_IMAGE, PHOTO_URL } from "../utils/constants";
 const Login = () => {
   const [showSignInForm, setShowSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
@@ -46,7 +45,7 @@ const Login = () => {
           if (user && user.email === email.current.value) {
             updateProfile(user, {
               displayName: name.current.value,
-              photoURL: "https://avatars.githubusercontent.com/u/49310523?v=4",
+              photoURL: { PHOTO_URL },
             })
               .then(() => {
                 const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -58,7 +57,6 @@ const Login = () => {
                     photoURL: photoURL,
                   })
                 );
-                navigate("/browse");
               })
               .catch((error) => {
                 const errorMessage = error.message;
@@ -79,10 +77,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          if (user.email === email.current.value) {
-            navigate("/browse");
-          }
-          // ...
         })
         .catch((error) => {
           console.log(error);
@@ -95,10 +89,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/a09bb938-2d90-42ae-986e-5a3e4abf9e77/8eb1e781-3494-4aa4-9405-268ca6473e4c/IN-en-20231113-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="background"
-        />
+        <img src={BACKGROUND_IMAGE} alt="background" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
