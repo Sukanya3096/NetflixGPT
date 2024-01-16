@@ -6,10 +6,18 @@ export const BACKGROUND_IMAGE =
 
 export const PHOTO_URL = "https://avatars.githubusercontent.com/u/49310523?v=4";
 
+export const OTHER_PHOTO_URL =
+  "https://occ-0-4603-3663.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABRFZFS8db1R43jhQH8qYonvQ7XOdqfn1JEgczxD7Uz5vCGx-vnN18_sI8xORbinwQJzWgucNziIuHH8mhFA1iR7CGB8A4ms.png?r=eea";
+
 export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: "Bearer {your token}",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMDY3YTk5OTU2NGFhNGQyM2I4MTBjMmVkZTNmODY0ZiIsInN1YiI6IjY1NWQ4ODdlMjY2Nzc4MDEwYzFmNmQzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VpdptKJWg8kHIKjxT43nlI1vqcUABbpW9QSDLrTn1TA",
   },
 };
+
+export const TRAILER = "Trailer";
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500/";
+export const MY_GUID = "46stQYqH8HYbNyvv0UnyRmsJUSp2";
